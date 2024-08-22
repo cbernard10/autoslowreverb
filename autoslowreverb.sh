@@ -19,7 +19,7 @@ yt-dlp -x $source --audio-format wav -o "./$output.wav"
 freq=`ffprobe -hide_banner -show_streams "./$output.wav" 2>/dev/null | sed -n '/sample_rate=/p' | tr "=" "\n" | sed -n 2p`
 newfreq=$(echo "scale=0;$freq*$ratio" | bc | awk '{printf("%d\n",$0 + 0.5)}')
 ffmpeg -i "./$output.wav" -af "asetrate=$newfreq" "./.tmp/${output}_slow.wav" -y
-sox "./.tmp/${output}_slow.wav" "./.tmp/${output}_sr.wav" gain -2 reverb 50 50 100
+sox -R "./.tmp/${output}_slow.wav" "./.tmp/${output}_sr.wav" gain -2 reverb 50 50 100
 ffmpeg -i "./.tmp/${output}_sr.wav" -acodec mp3 "$output.mp3" -y
 rm -rf ./.tmp
 echo "$output: $source"\n >> samples.txt
