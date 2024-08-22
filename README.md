@@ -10,4 +10,4 @@ dependencies:
 
 usage:
 
-sh ./autoslowreverb.sh -s <youtube-url> -o <output-name> [-r speed-ratio]
+`sh ./autoslowreverb.sh -s <youtube-url> -o <output-name> [-r speed-ratio]`
